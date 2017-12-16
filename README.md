@@ -16,17 +16,17 @@ Main aim is to apply Test Driven Development on a web project. In that project w
 
 # Major Functionalities for Web App(can be updated according to needs)
 
-[] I have heard about a cool new online to-do app. I go to checkout its home page
+1- I have heard about a cool new online to-do app. I go to checkout its home page
 
-[] I notice the page title and header mention to-do lists
+2- I notice the page title and header mention to-do lists
 		
-[] I am invited to enter a to-do item straight away
+3- I am invited to enter a to-do item straight away
 		
-[] I type "Buy peacock feathers" into text box. When I hit enter, the page updates, and now the page lists, "1: Buy peacock feathers" as an item in a to-do list
+4- I type "Buy peacock feathers" into text box. When I hit enter, the page updates, and now the page lists, "1: Buy peacock feathers" as an item in a to-do list
 
-[] There is still a text box inviting me to add another item. I enter "Use peacock feathers to make a fly". The page updates again, and now shows both items in my list
+5- There is still a text box inviting me to add another item. I enter "Use peacock feathers to make a fly". The page updates again, and now shows both items in my list
 
-[] I wonder whether site remembers my list. Then I see that the site has generated a unique URL for mine -- there is some explanatory text to that effect. I visit that URL - my to-do list is still there
+6- I wonder whether site remembers my list. Then I see that the site has generated a unique URL for mine -- there is some explanatory text to that effect. I visit that URL - my to-do list is still there
 
 # Setting up the development environment
 
@@ -43,7 +43,7 @@ Main aim is to apply Test Driven Development on a web project. In that project w
 
 ## Getting Django Up and Running
 
-$ django-admin.py startproject superlists
-$ python3 manage.py runserver
+`$ django-admin.py startproject superlists`
+`$ python3 manage.py runserver`
 
 Open a browser and type localhost:8000 as url.
