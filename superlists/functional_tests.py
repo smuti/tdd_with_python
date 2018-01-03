@@ -18,15 +18,20 @@ class NewVisitorTest(unittest.TestCase):
 
 		# I notice the page title and header mention to-do lists
 		self.assertIn('To-Do', self.browser.title)
-		
+		header_text = self.browser.find_element_by_tag_name('h1').text
+		self.assertEqual('To-Do lists', header_text)
 
 		# I am invited to enter a to-do item straight away
-		
+		inputbox = self.browser.find_element_by_id('id_new_item')
 		# I type "Buy peacock feathers" into text box
-		
+		inputbox.send_keys('Buy peacock feathers')
 
 		# When I hit enter, the page updates, and now the page lists
 		# "1: Buy peacock feathers" as an item in a to-do list
+		inputbox.send_keys(Keys.ENTER)
+		table = self.browser.find_element_by_id('id_list_id')
+		rows = table.finde_elements_by_tag_name('tr')
+		self.assertEqual('1: Buy peacock feathers', [row.text for row in rows])
 
 		# There is still a text box inviting me to add another item. I 
 		# enter "Use peacock feathers to make a fly"
