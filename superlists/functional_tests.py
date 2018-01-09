@@ -1,5 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
@@ -33,18 +36,28 @@ class NewVisitorTest(unittest.TestCase):
 		# When I hit enter, the page updates, and now the page lists
 		# "1: Buy peacock feathers" as an item in a to-do list
 		inputbox.send_keys(Keys.ENTER)
-		table = self.browser.find_element_by_id('id_list_table')
+		table = WebDriverWait(self.browser,10).until(EC.visibility_of_element_located((By.ID, 'id_list_table')))
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertEqual('1: Buy peacock feathers', [row.text for row in rows])
+
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
 
 		# There is still a text box inviting me to add another item. I 
 		# enter "Use peacock feathers to make a fly"
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('Use peacock feathers to make a fly')
+		inputbox.send_keys(Keys.ENTER)
+
 		
 		# The page updates again, and now shows both items in my list
+		table = WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, 'id_list_table')))
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+		self.assertIn('2: Use peacock feathers to make a fly', [row.text for row in rows])
 
 		# I wonder whether site remembers my list. Then I see
 		# that the site has generated a unique URL for mine -- there is 
 		# some explanatory text to that effect
+		self.fail('Finish the test!')
 
 		# I visit that URL - my to-do list is still there
 
