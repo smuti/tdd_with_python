@@ -3,7 +3,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import time
 import unittest
+
 
 class NewVisitorTest(unittest.TestCase):
 
@@ -15,7 +17,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser.quit()
 
 	def check_for_row_in_list_table(self,row_text):
-		table = WebDriverWait(self.browser, 10).until(EC.visibility_of_element_located((By.ID, 'id_list_table')))
+		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertIn(row_text, [row.text for row in rows])
 
@@ -41,6 +43,7 @@ class NewVisitorTest(unittest.TestCase):
 		# When I hit enter, the page updates, and now the page lists
 		# "1: Buy peacock feathers" as an item in a to-do list
 		inputbox.send_keys(Keys.ENTER)
+		time.sleep(2)
 		self.check_for_row_in_list_table('1: Buy peacock feathers')
 
 		# There is still a text box inviting me to add another item. I 
@@ -48,6 +51,7 @@ class NewVisitorTest(unittest.TestCase):
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		inputbox.send_keys('Use peacock feathers to make a fly')
 		inputbox.send_keys(Keys.ENTER)
+		time.sleep(2)
 
 		# The page updates again, and now shows both items in my list
 		self.check_for_row_in_list_table('1: Buy peacock feathers')
